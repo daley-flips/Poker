@@ -23,7 +23,7 @@ poker.dealNum = 1;
        
         poker.createDeck();       
         poker.giveMoneyToPlayers();
-System.out.println("testing github attempt 2");        
+System.out.println("testing github attempt 3");        
 while(true){//rounds will continue
         poker.shuffle();
         poker.deal();

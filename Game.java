@@ -8,22 +8,71 @@ public class Game{
         PokerHands pokerhands = new PokerHands();
         Tie tie = new Tie();
         
-//followind hard coded values that will be changed later to input by user
-poker.numOfPlayers = 2;
-poker.startMoney = 100;
-poker.littleBlind = 1;
-poker.bigBlind = 2;
-poker.dealNum = 1;
+//followind hard coded values are used for testing, should be input by user
+//poker.numOfPlayers = 2;
+//poker.startMoney = 100;
+//poker.littleBlind = 1;
+//poker.bigBlind = 2;
+poker.dealNum = 1;// randomize this later
 //end hardcode
+        Scanner initGame = new Scanner(System.in);
+        boolean completePreGame = false;
+        boolean isValidPlayers = false;
+        boolean stMoney = false;
+        boolean littleBl = false;
+        while(!completePreGame){
+            try{
+                while(!isValidPlayers){   
+                    System.out.println("How many players? (minimum 2)");     
+                    int numPlayers = initGame.nextInt();
+                    if(numPlayers >= 2){
+                        poker.numOfPlayers = numPlayers;
+                        isValidPlayers = true;
+                    }
+                    else{
+                        System.out.println("That's not a valid input. Please try again.");
+                    };
+                }
+                while(!stMoney){
+                    System.out.println("How much should starting money be? (minimum: 50, recommended is 100+)");     
+                    int startMon = initGame.nextInt();
+                    if(startMon >= 50){
+                        poker.startMoney = startMon;
+                        stMoney = true;
+                    }
+                    else{
+                        System.out.println("That's not a valid input. Please try again.");
+                    }
+                }
+                while(!littleBl){
+                    System.out.println("How much should little blind be? (big blind will be double) (recommended is 1-5)");     
+                    int lilb = initGame.nextInt();
+                    if(lilb >= 1){
+                        poker.littleBlind = lilb;
+                        poker.bigBlind = 2*lilb;
+                        initGame.nextLine();//just clearing scanner for later use
+                        littleBl = true;
+                    }
+                    else{
+                        System.out.println("That's not a valid input. Please try again.");
+                    }
+                }
+                completePreGame = true;
+            }
+            catch (InputMismatchException e) {
+                System.out.println("That's not a valid input. Please try again.");
+                initGame.nextLine();  // Clear the invalid input
+            }
+        }
         
-        
-        
-        
-              
-       
+        for(int i=0; i<10; i++){
+            System.out.println();
+        }     
+        //^just for aesthetics
+        System.out.println("Let's begin, give each player a number and hand the computer to one person, we will now be showing the cards, hit enter when ready");
+        String itDoesntMatterWhatTheyPut = initGame.nextLine();
         poker.createDeck();       
-        poker.giveMoneyToPlayers();
-System.out.println("I think i understand github again?!");        
+        poker.giveMoneyToPlayers();     
 while(true){//rounds will continue
         poker.shuffle();
         poker.deal();
@@ -43,10 +92,27 @@ while(true){//rounds will continue
                 if(poker.hasFolded[bidder-1] == false && poker.isGood.get(bidder-1) == false){
                     prompt(poker, poker.currBet, bidder);
                 }
-                //temporary to play against dad--->
-                for(int j=0; j<100; j++){
-                    System.out.println("hiding cards");
+                if(i+2 < poker.numOfPlayers*2){
+                    for(int hideCards=0; hideCards<100; hideCards++){
+                        System.out.println();
+                    }
+                    int incrementBidder = bidder+1;
+                    System.out.println("Hand the computer to player " + incrementBidder);
+                    System.out.println("Hi player " + incrementBidder + " Hit enter when you're ready to see your cards");
+                    itDoesntMatterWhatTheyPut = initGame.nextLine();
+                    for(int hideCards=0; hideCards<100; hideCards++){
+                        System.out.println();
+                    }//WAIT I DONT THINK THE PRINTS ARE IN THE RIGHT SPOT
+                    //GTG TO CLASS, FIX LATER
                 }
+                else{//WHEN WE GET TO THE LAST PLAYER
+                    System.out.println("hit enter and then let everyone see the computer after");
+                    itDoesntMatterWhatTheyPut = initGame.nextLine();
+                    for(int hideCards=0; hideCards<100; hideCards++){
+                        System.out.println();
+                    }
+                }
+    
                 bidder++;
             }
             onlyPrintPlayerCardsOnce = false;
@@ -107,8 +173,10 @@ while(true){//rounds will continue
             }    
         }
         poker.determineWinner();//could add a array parameter with player indexes who are still in
+        System.out.println("Current balance per player:");
         for(int i=0; i<poker.numOfPlayers; i++){
-            System.out.print(poker.chips[i] + " ");
+            int plNum = i+1;
+            System.out.println("Player " + plNum + ": " + poker.chips[i] + " ");
         }
         System.out.println();
         System.out.println("pot is " + poker.pot);
@@ -127,7 +195,8 @@ while(true){//rounds will continue
     else{
         poker.dealNum = 1;
     }
-
+    System.out.println("Let's begin, hand the computer to the player left of the big blind (or whoever bids first), we will now be showing the cards, hit enter when ready");
+    itDoesntMatterWhatTheyPut = initGame.nextLine();
     }//end while true        
     }//end main method
         

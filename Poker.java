@@ -191,7 +191,7 @@ public class Poker{
     //determines the winner based on whoever has the best hand
         
         int[] playerScores = new int[numOfPlayers];
-        System.out.println(this.playerHands);
+        //System.out.println(this.playerHands);
         PokerHands pokerhands = new PokerHands(); // Create an instance of the PokerHands class
         Tie tie = new Tie(); //create instance of Tie class
         ArrayList<String> cardsOnTableAndOnePlayersHand = new ArrayList<>(7);
@@ -287,7 +287,7 @@ public class Poker{
                 playerScores[countPlayerNum-1] = 0;
             }
             
-            System.out.println("Score for player " + (countPlayerNum) + ": "+ playerScore + ": " + theHand);
+            System.out.println("Hand for player " + (countPlayerNum) + ": " + theHand);
             countPlayerNum++;
             cardsOnTableAndOnePlayersHand.remove(6);
             cardsOnTableAndOnePlayersHand.remove(5);
@@ -336,8 +336,8 @@ public class Poker{
         }
         
         
-        System.out.println(this.playerHands);        
-        System.out.println(cardsOnTable);                
+        //System.out.println(this.playerHands);        
+        //System.out.println(cardsOnTable);                
     }
 //end determineWinner
 //-----------------------------------------------------------------------------------------------------------------------------------    

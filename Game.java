@@ -102,8 +102,8 @@ while(true){//rounds will continue
                     itDoesntMatterWhatTheyPut = initGame.nextLine();
                     for(int hideCards=0; hideCards<100; hideCards++){
                         System.out.println();
-                    }//WAIT I DONT THINK THE PRINTS ARE IN THE RIGHT SPOT
-                    //GTG TO CLASS, FIX LATER
+                    }//
+                    //
                 }
                 else{//WHEN WE GET TO THE LAST PLAYER
                     System.out.println("hit enter and then let everyone see the computer after");

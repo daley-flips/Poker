@@ -502,7 +502,7 @@ public class Tie{
     }//end high card   
 //----------------------------------------------------------------------------------------------------------------------------------        
         
-        output.append("balls");
+        output.append("that shouldnt happen lol");
         return output;    
     }//end breakTheTie
 }//end Tie class
